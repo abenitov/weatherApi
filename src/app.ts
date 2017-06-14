@@ -7,6 +7,7 @@ import * as express from "express";
 import * as path from "path";
 import errorHandler = require("errorhandler");
 import methodOverride = require("method-override");
+import APIRoutes from "./routes/APIRoutes";
 
 
 /**
@@ -77,6 +78,16 @@ export class Server {
      * @method api
      */
     public routes() {
-        //empty for now
+
+        let router = express.Router();
+        // placeholder route handler
+        router.get("/", (req, res, next) => {
+            res.json({
+                message: "Hello World!"
+            });
+        });
+        this.app.use("/", router);
+        this.app.use("/", new APIRoutes().router);
     }
+
 }
